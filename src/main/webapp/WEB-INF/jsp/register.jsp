@@ -18,6 +18,7 @@
     <title>Registration</title>
     <spring:url value="/resources/css/materialize.min.css" var="minCss"/>
     <spring:url value="/resources/js/materialize.min.js" var="minJs"/>
+    <spring:url value="/register" var="registerURL"/>
     <link type="text/css" href="${minCss}" rel="stylesheet" media="screen,projection"/>
 
 </head>
@@ -26,13 +27,13 @@
 
 <h4>Registration</h4>
 <div class="row">
-    <form:form action="/register" method="post" class="col s12" modelAttribute="user">
+    <form:form action="${registerURL}" method="post" class="col s12" modelAttribute="user">
 
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">assignment_ind</i>
-                <input placeholder="Enter your email" id="login" type="email" class="validate" name="login">
-                <label for="login">Login</label>
+                <input placeholder="Enter your email" id="email" type="email" class="validate" name="email">
+                <label for="email">Email</label>
             </div>
         </div>
 
@@ -45,7 +46,8 @@
 
             <div class="input-field col s6">
                 <i class="material-icons prefix">verified_user</i>
-                <input placeholder="Enter your password again" id="passwordConfirmation" type="password" class="validate" name="passwordConfirmation">
+                <input placeholder="Enter your password again" id="passwordConfirmation" type="password"
+                       class="validate" name="passwordConfirmation">
                 <label for="password">Password Confirmation</label>
             </div>
         </div>

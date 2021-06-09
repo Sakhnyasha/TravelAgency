@@ -1,26 +1,38 @@
 package org.sakhnyasha.repository;
 
-import org.sakhnyasha.model.User;
-import org.springframework.stereotype.Component;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+import org.sakhnyasha.entity.User;
+import org.sakhnyasha.repository.AbstractRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
-@Component
-public class UserRepository {
+@Repository
 
-    private static List<User> userList = new ArrayList<>();
+public class UserRepository extends AbstractRepository<User> {
 
-
-    public void addUser(User user){
-        userList.add(user);
+    public UserRepository() {
+        setClazz(User.class);
     }
 
-    public User getUser(String login){
-        return userList.stream().filter(user -> user.getLogin().equals(login)).findAny().orElse(null);
+    public User findByEmail(String email){
+        Session session = getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> root = cq.from(User.class);
+
+        cq.select(root).where(cb.equal(root.get("email"), email));
+
+        Query<User> query = session.createQuery(cq);
+        List<User> results = query.getResultList();
+
+        return results.get(0);
     }
 
-    public List<User> getAllUsers(){
-        return userList;
-    }
+
 }

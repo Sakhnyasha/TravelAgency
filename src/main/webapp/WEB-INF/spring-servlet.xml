@@ -17,7 +17,7 @@
     <mvc:resources mapping="/resources/**" location="WEB-INF/resources/"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix">
             <value>/WEB-INF/jsp/</value>
         </property>
@@ -25,4 +25,36 @@
             <value>.jsp</value>
         </property>
     </bean>
+
+    <!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="org.postgresql.Driver"/>
+            <property name="url" value="jdbc:postgresql://localhost:5432/travel_agency"/>
+            <property name="username" value="postgres"/>
+            <property name="password" value="admin"/>
+        </bean>
+
+        <bean id="myDataSource" class="">
+
+        </bean>-->
+
+    <!--    @Bean
+        public MessageSource messageSource(){
+        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+        source.setBasename("messages");
+        return source;
+        }-->
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>
+                    messages
+                </value>
+            </list>
+        </property>
+
+
+    </bean>
+
+
 </beans>
