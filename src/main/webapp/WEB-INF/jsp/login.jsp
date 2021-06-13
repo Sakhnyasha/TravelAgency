@@ -12,6 +12,7 @@
     <title>Login</title>
     <spring:url value="/resources/css/materialize.min.css" var="minCss"/>
     <spring:url value="/resources/js/materialize.min.js" var="minJs"/>
+    <spring:url value="/login" var="loginURL"/>
     <link type="text/css" href="${minCss}" rel="stylesheet" media="screen,projection"/>
 
 </head>
@@ -20,12 +21,12 @@
 
 <h4>Login</h4>
 <div class="row">
-    <form:form action="/register" method="post" class="col s12" modelAttribute="user">
+    <form:form action="${loginURL}" method="post" class="col s12" enctype="application/x-www-form-urlencoded">
 
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">assignment_ind</i>
-                <input placeholder="Email" id="login" type="email" class="validate" name="login">
+                <input placeholder="Email" id="login" type="email" class="validate" name="username">
                 <label for="login">Login</label>
             </div>
         </div>
@@ -46,8 +47,9 @@
                     <i class="material-icons right">assignment_ind</i>
                 </button>
             </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="input-field col s2">
-                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <button value="submit" class="btn waves-effect waves-light" type="submit" name="submit">Submit
                     <i class="material-icons right">send</i>
                 </button>
             </div>

@@ -1,23 +1,17 @@
 package org.sakhnyasha.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
     @Id
+    @Setter
+    @Getter
     @GeneratedValue
     @Column(name = "id")
     protected Long id;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

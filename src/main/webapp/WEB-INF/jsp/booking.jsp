@@ -13,6 +13,7 @@
     <spring:url value="/resources/css/materialize.min.css" var="minCss"/>
     <spring:url value="/resources/js/materialize.min.js" var="minJs"/>
     <link type="text/css" href="${minCss}" rel="stylesheet" media="screen,projection"/>
+    <spring:url value="/login" var="loginURL"/>
 
 </head>
 <body>
@@ -85,7 +86,7 @@
                 <div class="row">
                     <div class="input-field col s3">
                         <button class="btn waves-effect waves-light" type="button"
-                                name="action" onclick="location.href='login'">Cancel
+                                name="action" onclick="location.href='${loginURL}'">Cancel
                             <i class="material-icons right">cancel</i>
                         </button>
                     </div>

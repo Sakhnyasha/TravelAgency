@@ -41,14 +41,14 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.4.31.Final</version>
+      <version>5.5.0.Final</version>
     </dependency>
 
     <!-- Hibernate-C3P0 Integration -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-c3p0</artifactId>
-      <version>5.4.31.Final</version>
+      <version>5.5.0.Final</version>
     </dependency>
 
     <!-- c3p0 -->
@@ -65,19 +65,46 @@
       <version>7.0.1.Final</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <version>42.2.20</version>
     </dependency>
 
+    <!--Spring Security-->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>5.3.4.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>5.3.4.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>5.3.4.RELEASE</version>
+    </dependency>
 
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>5.3.4.RELEASE</version>
+    </dependency>
+
+    <!-- Add Jstl Dependencies -->
+    <dependency>
+      <groupId>org.apache.taglibs</groupId>
+      <artifactId>taglibs-standard-jstlel</artifactId>
+      <version>1.2.5</version>
+    </dependency>
 
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.2</version>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -100,6 +127,26 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.20</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>2.0.1.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.taglibs</groupId>
+      <artifactId>taglibs-standard-jstlel</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -117,6 +164,15 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
+          <configuration>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.20</version>
+              </path>
+            </annotationProcessorPaths>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -136,5 +192,6 @@
         </plugin>
       </plugins>
     </pluginManagement>
+
   </build>
 </project>

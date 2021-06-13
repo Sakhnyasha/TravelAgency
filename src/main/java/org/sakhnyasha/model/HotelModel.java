@@ -2,17 +2,17 @@ package org.sakhnyasha.model;
 
 import java.util.Objects;
 
-public class Hotel {
+public class HotelModel {
 
     private String name;
     private String address;
     private String country;
     private String city;
 
-    public Hotel() {
+    public HotelModel() {
     }
 
-    public Hotel(String name, String address, String country, String city) {
+    public HotelModel(String name, String address, String country, String city) {
         this.name = name;
         this.address = address;
         this.country = country;
@@ -65,7 +65,7 @@ public class Hotel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Hotel hotel = (Hotel) o;
+        HotelModel hotel = (HotelModel) o;
         return Objects.equals(name, hotel.name) && Objects.equals(address, hotel.address) && Objects.equals(country, hotel.country) && Objects.equals(city, hotel.city);
     }
 

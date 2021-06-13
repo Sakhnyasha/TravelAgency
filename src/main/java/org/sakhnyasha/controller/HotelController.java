@@ -1,6 +1,6 @@
 package org.sakhnyasha.controller;
 
-import org.sakhnyasha.model.Hotel;
+import org.sakhnyasha.model.HotelModel;
 import org.sakhnyasha.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +13,21 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
-    @GetMapping("/hotelList")
+    @GetMapping("/manager/hotelList")
     public ModelAndView userListView(Model model){
-        return new ModelAndView("hotelList", "hotel", new Hotel());
+        return new ModelAndView("hotelList", "hotel", new HotelModel());
     }
 
-    @GetMapping("/hotelAdding")
+    @GetMapping("/manager/hotelAdding")
     public ModelAndView hotelAddView(Model model){
-        return new ModelAndView("hotelAdding", "hotel", new Hotel());
+        return new ModelAndView("hotelAdding", "hotel", new HotelModel());
     }
+
+    @GetMapping("/user/booking")
+    public ModelAndView hotelBookView(Model model){
+        return new ModelAndView("booking", "hotel", new HotelModel());
+    }
+
 
 
 
