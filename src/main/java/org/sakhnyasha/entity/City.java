@@ -10,7 +10,7 @@ public class City extends BaseEntity{
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
     public String getName() {

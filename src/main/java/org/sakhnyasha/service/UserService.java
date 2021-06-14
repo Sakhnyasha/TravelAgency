@@ -1,5 +1,6 @@
 package org.sakhnyasha.service;
 
+import org.sakhnyasha.entity.Role;
 import org.sakhnyasha.entity.User;
 import org.sakhnyasha.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,14 @@ public class UserService {
 
     public User updateUser(User user){
         return userRepository.update(user);
+    }
+
+    public void changeRole(Long id){
+        User one = userRepository.findOne(id);
+        Role oldRole = one.getRole();
+        Role newRole = oldRole.equals(Role.MANAGER) ? Role.USER : Role.MANAGER;
+        one.setRole(newRole);
+        userRepository.update(one);
     }
 
 

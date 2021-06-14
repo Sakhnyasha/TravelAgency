@@ -3,6 +3,7 @@ package org.sakhnyasha.security;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.sakhnyasha.entity.Role;
 import org.sakhnyasha.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,9 +29,15 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public static UserPrincipal create(User user){
-        List<GrantedAuthority> authorities = Collections.singletonList(
-                new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+    public static UserPrincipal create(User user) {
+        List<GrantedAuthority> authorities = new LinkedList();
+
+        if (user.getRole().equals(Role.MANAGER)) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + Role.USER));
+        }
+
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+
         return new UserPrincipal(
                 user.getId(),
                 user.getFirstName(),
