@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+//where to get users for spring security
 @Service
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
@@ -19,11 +19,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
-        return UserPrincipal.create(user);
-    }
-
-    public UserDetails loadUserById(Long id) throws UsernameNotFoundException {
-        User user = userRepository.findOne(id);
         return UserPrincipal.create(user);
     }
 }

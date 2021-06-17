@@ -1,13 +1,13 @@
 package org.sakhnyasha.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.sakhnyasha.entity.Role;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class UserModel {
 
     private Long id;

@@ -9,32 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class HotelController {
+public class BookingController {
     @Autowired
     private HotelService hotelService;
-
-    @GetMapping("/manager/hotelList")
-    public ModelAndView userListView(Model model){
-        return new ModelAndView("hotelList", "hotel", new HotelModel());
-    }
-
-    @GetMapping("/manager/hotelAdding")
-    public ModelAndView hotelAddView(Model model){
-        return new ModelAndView("hotelAdding", "hotel", new HotelModel());
-    }
 
     @GetMapping("/user/booking")
     public ModelAndView hotelBookView(Model model){
         return new ModelAndView("booking", "hotel", new HotelModel());
     }
 
-
-
-
 }
-
-
-
-
-
-

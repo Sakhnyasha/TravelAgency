@@ -12,6 +12,7 @@
     <title>Login</title>
     <spring:url value="/resources/css/materialize.min.css" var="minCss"/>
     <spring:url value="/resources/js/materialize.min.js" var="minJs"/>
+<%--    to build in controller (only if post method)--%>
     <spring:url value="/login" var="loginURL"/>
     <link type="text/css" href="${minCss}" rel="stylesheet" media="screen,projection"/>
 

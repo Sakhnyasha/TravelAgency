@@ -1,8 +1,6 @@
 package org.sakhnyasha.config;
 
-import org.sakhnyasha.entity.City;
-import org.sakhnyasha.entity.Country;
-import org.sakhnyasha.entity.User;
+import org.sakhnyasha.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +20,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setConfigLocation(context.getResource("classpath:hibernate.cfg.xml"));
-        factoryBean.setAnnotatedClasses(User.class, Country.class, City.class);
+        factoryBean.setAnnotatedClasses(User.class, Country.class, City.class, Hotel.class, Room.class);
 
         //factoryBean.setAnnotatedPackages("org.sakhnyasha.entity");
         return factoryBean;

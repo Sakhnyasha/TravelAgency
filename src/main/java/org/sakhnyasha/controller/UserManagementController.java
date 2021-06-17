@@ -18,23 +18,9 @@ import java.util.stream.Collectors;
 
 @Controller
 //@RequestMapping(value = "", method = RequestMethod.POST)
-public class UserController {
+public class UserManagementController {
     @Autowired
     private UserService userService;
-
-    @GetMapping("/register")
-    public ModelAndView register(){
-        return new ModelAndView("register", "user", new RegistrationModel());
-    }
-
-    @PostMapping("/register")
-    public String addUser(@ModelAttribute("user") RegistrationModel user, BindingResult result, ModelMap model){
-
-        User newUser = new User(user.getEmail(), Role.USER, user.getFirstName(),
-                user.getLastName(), user.getPassword());
-        userService.addUser(newUser);
-        return "login";
-    }
 
     @GetMapping("/manager/userList")
     public ModelAndView userListView(){
@@ -42,11 +28,6 @@ public class UserController {
                 .map(user -> new UserModel(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getRole()))
                 .collect(Collectors.toList());
         return new ModelAndView("userList", "users", users);
-    }
-
-    @GetMapping("/user/cabinet")
-    public ModelAndView userCabinetView(){
-        return new ModelAndView("userCabinet", "user", new RegistrationModel());
     }
 
     @PostMapping("/manager/userList/deleteUser")

@@ -1,9 +1,16 @@
 package org.sakhnyasha.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "cities")
+@AllArgsConstructor
+@NoArgsConstructor
 public class City extends BaseEntity{
 
     @Column(name = "name", unique = true)
@@ -13,11 +20,4 @@ public class City extends BaseEntity{
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

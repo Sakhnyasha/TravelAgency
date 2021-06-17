@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @Controller
-public class RootController {
+public class LoginController {
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String loginPage(){

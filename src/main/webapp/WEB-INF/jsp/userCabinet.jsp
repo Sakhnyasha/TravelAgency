@@ -15,20 +15,18 @@
     <spring:url value="/resources/js/materialize.min.js" var="minJs"/>
     <link type="text/css" href="${minCss}" rel="stylesheet" media="screen,projection"/>
 
+
+    <spring:url value="/manager/hotels" var="manageHotelsUrl"/>
+
+
 </head>
 <body>
 <script type="text/javascript" src="${minJs}"></script>
 <div class="row">
     <h4>User Cabinet</h4>
 </div>
-<div class="row">
-    <div class="col s3">
-        <button class="btn waves-effect waves-light" type="button"
-                name="action" onclick="location.href='booking'">Back
-            <i class="material-icons right">arrow_back</i>
-        </button>
-    </div>
 
+<div class="row">
     <div class="col s3">
         <h6>Hello
             <security:authorize access="isAuthenticated()">
@@ -38,6 +36,26 @@
             </security:authorize>
             !</h6>
     </div>
+</div>
+
+<div class="row">
+    <div class="col s3">
+        <button class="btn waves-effect waves-light" type="button"
+                name="action" onclick="location.href='booking'">To Booking
+            <i class="material-icons right">arrow_back</i>
+        </button>
+    </div>
+
+    <security:authorize access="hasRole('ROLE_MANAGER')">
+    <div class="col s3">
+        <button class="btn waves-effect waves-light" type="button"
+                name="action" onclick="location.href='${manageHotelsUrl}'">Manage Hotels
+            <i class="material-icons right">hotel</i>
+        </button>
+    </div>
+    </security:authorize>
+
+
 </div>
 
 <div class="row">
