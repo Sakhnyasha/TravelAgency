@@ -32,26 +32,6 @@
 <h4>Add Hotel</h4>
 <div class="row">
     <div class="row">
-        <div>
-            <h6>Hotel Name</h6>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="input-field col s6">
-            <i class="material-icons prefix">hotel</i>
-            <input id="name" type="text" class="validate" name="hotelName" form="hotelData">
-            <label for="name">Hotel Name</label>
-        </div>
-    </div>
-
-    <div class="row">
-        <div>
-            <h6>Hotel Location</h6>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="input-field col s1">
             <i class="material-icons prefix">language</i>
             <label for="country" class="select-label">Country</label>
@@ -91,6 +71,14 @@
                         <option value="${city.id}">${city.name}</option>
                     </c:forEach>
                 </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">hotel</i>
+                <input id="name" type="text" class="validate" name="hotelName" form="hotelData">
+                <label for="name">Hotel Name</label>
             </div>
         </div>
 
