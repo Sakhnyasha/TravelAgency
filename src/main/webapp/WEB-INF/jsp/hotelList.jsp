@@ -72,7 +72,7 @@
                     </form:form>
                 </td>
                 <td>
-                    <button class="btn waves-effect waves-light" type="button" name="action"
+                    <button class="btn waves-effect waves-light" type="button" name="rooms"
                             onclick="location.href='<spring:url value="/hotels/${hotel.id}/rooms"/>'">Edit Rooms
                         <i class="material-icons right">edit</i>
                     </button>

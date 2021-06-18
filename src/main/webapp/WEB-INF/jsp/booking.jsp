@@ -13,11 +13,17 @@
     <spring:url value="/resources/css/materialize.min.css" var="minCss"/>
     <spring:url value="/resources/js/materialize.min.js" var="minJs"/>
     <link type="text/css" href="${minCss}" rel="stylesheet" media="screen,projection"/>
-    <spring:url value="/login" var="loginURL"/>
+    <spring:url value="/user/cabinet" var="toUserCabinetlURL"/>
 
 </head>
 <body>
 <script type="text/javascript" src="${minJs}"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
+</script>
 
 <div class="row">
     <div class="row">
@@ -27,28 +33,44 @@
         </div>
 
         <div class="col s6">
-            <form method="post" action="/booking" id="booking">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">language</i>
-                        <label for="country" class="select-label">Country</label>
-                        <select name="country" id="country" class="select-dropdown" onselect="">
-                            <c:forEach items="${countries}" var="country">
-                                <option value="${country.id}">${country.name}
-                                </option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
 
                 <div class="row">
-                    <div class="input-field col s6">
+                    <div class="input-field col s2">
+                        <i class="material-icons prefix">language</i>
+                        <label for="country" class="select-label">Country</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <form action="${addHotelUrl}" method="post">
+                            <select name="selectedCountry" id="country" required="required" onchange="this.form.submit()">
+                                <c:if test="${empty selectedCountry}">
+                                    <option disabled selected> -- select country --</option>
+                                </c:if>
+                                <c:if test="${not empty selectedCountry}">
+                                    <option disabled> -- select country --</option>
+                                </c:if>
+                                <c:forEach items="${countries}" var="country">
+                                    <c:if test="${country.id eq selectedCountry}">
+                                        <option value="${country.id}" selected>${country.name}</option>
+                                    </c:if>
+                                    <c:if test="${selectedCountry ne country.id}">
+                                        <option value="${country.id}">${country.name}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+            <form method="post" action="/booking" id="booking">
+                <div class="row">
+                    <div class="input-field col s2">
                         <i class="material-icons prefix">location_city</i>
                         <label for="city">City</label>
-                        <select name="city" id="city" class="select-dropdown">
+                    </div>
+                    <div class="input-field col s4">
+                        <select name="cityId" id="city" class="select-dropdown" required="required">
+                            <option disabled="disabled" selected="selected"> -- select city --</option>
                             <c:forEach items="${cities}" var="city">
-                                <option value="${city.id}">${city.name}
-                                </option>
+                                <option value="${city.id}">${city.name}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -86,7 +108,7 @@
                 <div class="row">
                     <div class="input-field col s3">
                         <button class="btn waves-effect waves-light" type="button"
-                                name="action" onclick="location.href='${loginURL}'">Cancel
+                                name="action" onclick="location.href='${toUserCabinetlURL}'">Cancel
                             <i class="material-icons right">cancel</i>
                         </button>
                     </div>
@@ -105,6 +127,14 @@
                 <h5>Available Hotels</h5>
             </div>
 
+            <div class="row">
+                <div class="input-field col s3">
+                    <button class="btn waves-effect waves-light" type="submit"
+                            name="action">Book
+                        <i class="material-icons right">check</i>
+                    </button>
+                </div>
+            </div>
             <div class="row" align="center">
                 <table style="table-layout: auto">
                     <tr>
@@ -128,15 +158,7 @@
                     </c:forEach>
                 </table>
             </div>
-
-            <div class="input-field col s3">
-                <button class="btn waves-effect waves-light" type="submit"
-                        name="action">Book
-                    <i class="material-icons right">check</i>
-                </button>
-            </div>
         </div>
-
     </div>
 </div>
 

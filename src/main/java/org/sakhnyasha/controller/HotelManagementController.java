@@ -84,6 +84,20 @@ public class HotelManagementController {
         return "redirect:/manager/hotels";
     }
 
+    @GetMapping("/hotels/{hotelId}/rooms/add")
+    public ModelAndView addRoomView(@PathVariable("hotelId") Long hotelId) {
+        return new ModelAndView("roomAdding", "hotelId", hotelId);
+    }
+
+    @PostMapping("/hotels/{hotelId}/rooms/add")
+    public String addRoom(@ModelAttribute("name") String roomName, @ModelAttribute("price") Double price,
+                                    @ModelAttribute("capacity") Integer capacity,
+                              @PathVariable("hotelId") Long hotelId) {
+        locationService.addRoom(roomName, price, capacity, hotelId);
+
+        return "redirect:/hotels/" + hotelId + "/rooms";
+    }
+
 
 
 }

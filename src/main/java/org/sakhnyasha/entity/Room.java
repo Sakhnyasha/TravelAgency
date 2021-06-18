@@ -3,6 +3,8 @@ package org.sakhnyasha.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -15,6 +17,7 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Room extends BaseEntity{
 
     @Column(name = "name")
@@ -34,4 +37,6 @@ public class Room extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "hotel_id", nullable = false)
     private Hotel hotel;
+
+
 }

@@ -16,6 +16,8 @@
     <spring:url value="/manager/userList" var="userListURL"/>
     <spring:url value="/manager/userList/deleteUser" var="deleteUserURL"/>
     <spring:url value="/manager/userList/changeRoleUser" var="changeRoleUserURL"/>
+    <spring:url value="/manager/users/${user.id}/orders" var="orderURL"/>
+    <spring:url value="/user/cabinet" var="toUserCabinetlURL"/>
 
 </head>
 <body>
@@ -23,12 +25,22 @@
 
 <h4>Users List</h4>
 
+<div class="row">
+    <div class="input-field col s3">
+        <button class="btn waves-effect waves-light" type="button"
+                name="action" onclick="location.href='${toUserCabinetlURL}'">User Cabinet
+            <i class="material-icons right">arrow_back</i>
+        </button>
+    </div>
+</div>
+
 <table style="table-layout: auto">
     <tr>
         <td><strong>Login</strong></td>
         <td><strong>Firs Name</strong></td>
         <td><strong>Last Name</strong></td>
         <td><strong>Role</strong></td>
+        <td></td>
         <td></td>
         <td></td>
     </tr>
@@ -47,6 +59,14 @@
                         <i class="material-icons right">delete</i>
                     </button>
                 </form:form>
+            </td>
+            <td>
+                <form name="seeOrderForm" id="seeOrderForm" method="post" action="${orderURL}">
+                    <button value="${user.id}" class="btn waves-effect waves-light" type="submit" name="user">
+                        Orders
+                        <i class="material-icons right">list</i>
+                    </button>
+                </form>
             </td>
             <td>
                 <form:form name="promoteForm" id="promoteForm" method="post" action="${changeRoleUserURL}">

@@ -44,5 +44,10 @@ public class UserManagementController {
         return "redirect:/manager/userList";
     }
 
+    @GetMapping("/manager/users/{userId}/orders")
+    public ModelAndView userOrdersView(@PathVariable("userId") Long userId){
+        return new ModelAndView("orders");
+    }
+
 
 }

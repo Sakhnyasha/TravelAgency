@@ -14,36 +14,42 @@
     <spring:url value="/resources/js/materialize.min.js" var="minJs"/>
     <link type="text/css" href="${minCss}" rel="stylesheet" media="screen,projection"/>
 
+    <spring:url value="/manager/hotels" var="hotelListUrl"/>
+    <spring:url value="/hotels/${hotelId}/rooms/add" var="roomAddingUrl"/>
+
 </head>
 <body>
 <script type="text/javascript" src="${minJs}"></script>
 
-<h4>Rooms List</h4>
+<h4>Room List</h4>
+<div class="row">
+    <div class="input-field col s3">
+        <button class="btn waves-effect waves-light" type="button"
+                name="action" onclick="location.href='${hotelListUrl}'">Hotels
+            <i class="material-icons right">arrow_back</i>
+        </button>
+    </div>
+
+    <div class="input-field col s3">
+        <button class="btn waves-effect waves-light" type="button"
+                name="roomAdding" onclick="location.href='${roomAddingUrl}'">Add Room
+            <i class="material-icons right">add</i>
+        </button>
+    </div>
+</div>
+
 <table style="table-layout: auto">
     <tr>
         <td><strong>Name</strong></td>
         <td><strong>Number of Persons</strong></td>
         <td><strong>Price</strong></td>
-        <td><strong>Edit</strong></td>
-        <td><strong>Delete</strong></td>
 
     </tr>
     <c:forEach items="${rooms}" var="room">
         <tr>
-
             <td>${room.name}</td>
             <td>${room.capacity}</td>
             <td>${room.price}</td>
-            <td>
-                <button class="btn waves-effect waves-light" type="edit" name="action">Edit
-                    <i class="material-icons right">edit</i>
-                </button>
-            </td>
-            <td>
-                <button class="btn waves-effect waves-light" type="edit" name="action">Delete
-                    <i class="material-icons right">delete</i>
-                </button>
-            </td>
         </tr>
     </c:forEach>
 </table>

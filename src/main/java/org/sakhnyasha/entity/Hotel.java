@@ -3,11 +3,14 @@ package org.sakhnyasha.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -29,4 +32,5 @@ public class Hotel extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
+
 }

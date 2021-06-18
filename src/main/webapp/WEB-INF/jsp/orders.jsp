@@ -10,68 +10,31 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>User List</title>
+    <title>Orders</title>
     <spring:url value="/resources/css/materialize.min.css" var="minCss"/>
     <spring:url value="/resources/js/materialize.min.js" var="minJs"/>
     <link type="text/css" href="${minCss}" rel="stylesheet" media="screen,projection"/>
 
 
-    <spring:url value="/manager/hotels" var="manageHotelsUrl"/>
+
     <spring:url value="/manager/userList" var="userListUrl"/>
-    <spring:url value="/logout" var="logout"/>
 
 
 </head>
 <body>
 <script type="text/javascript" src="${minJs}"></script>
 <div class="row">
-    <h4>User Cabinet</h4>
+    <h4>Orders</h4>
 </div>
 
-<div class="row">
-    <div class="col s3">
-        <h6>Hello
-            <security:authorize access="isAuthenticated()">
-                <security:authentication property="principal.firstName"/>
-
-                <security:authentication property="principal.lastName"/>
-            </security:authorize>
-            !</h6>
-    </div>
-</div>
 
 <div class="row">
     <div class="col s3">
         <button class="btn waves-effect waves-light" type="button"
-                name="action" onclick="location.href='booking'">To Booking
+                name="action" onclick="location.href='${userListUrl}'">Back
             <i class="material-icons right">arrow_back</i>
         </button>
     </div>
-
-    <security:authorize access="hasRole('ROLE_MANAGER')">
-        <div class="col s3">
-            <button class="btn waves-effect waves-light" type="button"
-                    name="action" onclick="location.href='${manageHotelsUrl}'">Manage Hotels
-                <i class="material-icons right">hotel</i>
-            </button>
-        </div>
-
-        <div class="col s3">
-            <button class="btn waves-effect waves-light" type="button"
-                    name="action" onclick="location.href='${userListUrl}'">User List
-                <i class="material-icons right">supervisor_account</i>
-            </button>
-        </div>
-    </security:authorize>
-
-    <div class="col s3">
-        <button class="btn waves-effect waves-light" type="button"
-                name="action" onclick="location.href='${logout}'">Log out
-            <i class="material-icons right">person_outline</i>
-        </button>
-    </div>
-
-
 </div>
 
 <div class="row">
