@@ -19,6 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserPrincipal implements UserDetails {
 
+    @Getter
     private Long id;
     @Getter
     private String firstName;

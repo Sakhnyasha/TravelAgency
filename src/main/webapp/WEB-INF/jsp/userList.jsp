@@ -16,7 +16,7 @@
     <spring:url value="/manager/userList" var="userListURL"/>
     <spring:url value="/manager/userList/deleteUser" var="deleteUserURL"/>
     <spring:url value="/manager/userList/changeRoleUser" var="changeRoleUserURL"/>
-    <spring:url value="/manager/users/${user.id}/orders" var="orderURL"/>
+    <spring:url value="/manager/users/" var="orderURL"/>
     <spring:url value="/user/cabinet" var="toUserCabinetlURL"/>
 
 </head>
@@ -61,7 +61,7 @@
                 </form:form>
             </td>
             <td>
-                <form name="seeOrderForm" id="seeOrderForm" method="post" action="${orderURL}">
+                <form name="seeOrderForm" id="seeOrderForm" method="get" action="${orderURL}${user.id}/orders">
                     <button value="${user.id}" class="btn waves-effect waves-light" type="submit" name="user">
                         Orders
                         <i class="material-icons right">list</i>

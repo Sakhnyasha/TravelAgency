@@ -47,4 +47,10 @@ public class HotelService {
         Hotel newHotel = new Hotel(hotelName, hotelAddress, city);
         hotelRepository.save(newHotel);
     }
+
+    public void addRoom(String name, Double price, Integer capacity, Long hotelId){
+        Hotel hotel = hotelRepository.findOne(hotelId);
+        Room newRoom = new Room(name, price, capacity, hotel);
+        roomRepository.save(newRoom);
+    }
 }

@@ -23,12 +23,6 @@ public class LocationService {
     @Autowired
     private CityRepository cityRepository;
 
-    @Autowired
-    private RoomRepository roomRepository;
-
-    @Autowired
-    private HotelRepository hotelRepository;
-
     public List<Country> getAllCountries() {
         return countryRepository.findAll();
     }
@@ -43,9 +37,4 @@ public class LocationService {
         cityRepository.save(newCity);
     }
 
-    public void addRoom(String name, Double price, Integer capacity, Long hotelId){
-        Hotel hotel = hotelRepository.findOne(hotelId);
-        Room newRoom = new Room(name, price, capacity, hotel);
-        roomRepository.save(newRoom);
-    }
 }

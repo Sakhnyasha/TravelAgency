@@ -93,7 +93,7 @@ public class HotelManagementController {
     public String addRoom(@ModelAttribute("name") String roomName, @ModelAttribute("price") Double price,
                                     @ModelAttribute("capacity") Integer capacity,
                               @PathVariable("hotelId") Long hotelId) {
-        locationService.addRoom(roomName, price, capacity, hotelId);
+        hotelService.addRoom(roomName, price, capacity, hotelId);
 
         return "redirect:/hotels/" + hotelId + "/rooms";
     }

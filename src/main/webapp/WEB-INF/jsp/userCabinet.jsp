@@ -84,18 +84,20 @@
                 <td><strong>Location</strong></td>
                 <td><strong>Check-in Date</strong></td>
                 <td><strong>Check-out Date</strong></td>
+                <td><strong>Room Name</strong></td>
                 <td><strong>Number of Persons</strong></td>
                 <td><strong>Price</strong></td>
             </tr>
-            <c:forEach items="${users}" var="user">
+            <c:forEach items="${bookings}" var="booking">
                 <tr>
                     <td>${booking.id}</td>
-                    <td>${booking.hotelName}</td>
-                    <td>${booking.country}, ${booking.city}, ${booking.address} </td>
-                    <td>${booking.checkin}</td>
-                    <td>${booking.checkout}</td>
-                    <td>${booking.numOfPersons}</td>
-                    <td>${booking.price}</td>
+                    <td>${booking.room.hotel.name}</td>
+                    <td>${booking.room.hotel.city.country.name}, ${booking.room.hotel.city.name}, ${booking.room.hotel.address} </td>
+                    <td>${booking.checkIn}</td>
+                    <td>${booking.checkOut}</td>
+                    <td>${booking.room.name}</td>
+                    <td>${booking.room.capacity}</td>
+                    <td>${booking.room.price}</td>
                 </tr>
             </c:forEach>
         </table>
