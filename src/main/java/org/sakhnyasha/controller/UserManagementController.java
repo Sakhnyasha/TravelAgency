@@ -1,18 +1,15 @@
 package org.sakhnyasha.controller;
 
 import org.sakhnyasha.entity.Booking;
-import org.sakhnyasha.entity.Role;
-import org.sakhnyasha.entity.User;
-import org.sakhnyasha.model.RegistrationModel;
 import org.sakhnyasha.model.UserModel;
 import org.sakhnyasha.service.BookingService;
 import org.sakhnyasha.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;

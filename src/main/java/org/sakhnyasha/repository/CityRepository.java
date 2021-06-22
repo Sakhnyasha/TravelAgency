@@ -3,8 +3,6 @@ package org.sakhnyasha.repository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.sakhnyasha.entity.City;
-import org.sakhnyasha.entity.Country;
-import org.sakhnyasha.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;

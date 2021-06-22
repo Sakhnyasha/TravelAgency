@@ -1,21 +1,33 @@
 package org.sakhnyasha.controller;
 
+
 import org.sakhnyasha.entity.City;
 import org.sakhnyasha.entity.Country;
 import org.sakhnyasha.entity.Room;
+import org.sakhnyasha.model.CityModel;
 import org.sakhnyasha.model.HotelModel;
+import org.sakhnyasha.model.NewHotelModel;
+import org.sakhnyasha.model.RoomModel;
 import org.sakhnyasha.service.HotelService;
 import org.sakhnyasha.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@Validated
 public class HotelManagementController {
     @Autowired
     private HotelService hotelService;
@@ -50,10 +62,23 @@ public class HotelManagementController {
 
 
     @PostMapping("/manager/hotels/add/success")
-    public String saveHotel(@ModelAttribute("cityId") Long cityId,
-                            @ModelAttribute("address") String hotelAddress,
-                            @ModelAttribute("hotelName") String hotelName) {
-        hotelService.addHotel(hotelName, hotelAddress, cityId);
+    public String saveHotel(@Valid @ModelAttribute("newHotel")NewHotelModel newHotel,
+                            BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            City city = locationService.getCity(newHotel.getCityId());
+            model.addAttribute("selectedCountry", city.getCountry().getId());
+            model.addAttribute("hotelName", newHotel.getHotelName());
+            model.addAttribute("address", newHotel.getHotelAddress());
+            List<Country> countryList = locationService.getAllCountries();
+            List<City> allCitiesForCountry =
+                    locationService.getAllCitiesForCountry(city.getCountry().getId());
+            model.addAttribute("countries", countryList);
+            model.addAttribute("cities", allCitiesForCountry);
+            model.addAttribute("selectedCity", newHotel.getCityId());
+            return "hotelAdding";
+        }
+
+        hotelService.addHotel(newHotel.getHotelName(), newHotel.getHotelAddress(), newHotel.getCityId());
 
         return "redirect:/manager/hotels";
     }
@@ -75,12 +100,19 @@ public class HotelManagementController {
     public ModelAndView addCityView(Model model) {
         List<Country> countryList = locationService.getAllCountries();
         model.addAttribute("countries", countryList);
-        return new ModelAndView("cityAdding");
+        return new ModelAndView("cityAdding", "city", new CityModel());
     }
 
     @PostMapping("/manager/cities/add")
-    public String addCity(@ModelAttribute("city") String cityName, @ModelAttribute("selectedCountry") Long countryId) {
-        locationService.addCity(cityName, countryId);
+    public String addCity(@Valid @ModelAttribute("city") CityModel city,
+                          BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("countries", locationService.getAllCountries());
+            model.addAttribute("currentCity", city.getName());
+            return "cityAdding";
+        }
+        locationService.addCity(city.getName(), city.getCountryId());
         return "redirect:/manager/hotels";
     }
 
@@ -90,14 +122,18 @@ public class HotelManagementController {
     }
 
     @PostMapping("/hotels/{hotelId}/rooms/add")
-    public String addRoom(@ModelAttribute("name") String roomName, @ModelAttribute("price") Double price,
-                                    @ModelAttribute("capacity") Integer capacity,
-                              @PathVariable("hotelId") Long hotelId) {
-        hotelService.addRoom(roomName, price, capacity, hotelId);
+    public String addRoom(@Valid @ModelAttribute("room")RoomModel room, BindingResult bindingResult,
+                          @PathVariable("hotelId") Long hotelId, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("name", room.getName());
+            model.addAttribute("price", room.getPrice());
+            model.addAttribute("capacity", room.getCapacity());
+            return "roomAdding";
+        }
+        hotelService.addRoom(room.getName(), room.getPrice(), room.getCapacity(), hotelId);
 
         return "redirect:/hotels/" + hotelId + "/rooms";
     }
-
 
 
 }

@@ -32,39 +32,46 @@
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">assignment_ind</i>
-                <input placeholder="Enter your email" id="email" type="email" class="validate" name="email">
+                <input placeholder="Enter your email" id="email" type="email" class="validate" name="email" required>
                 <label for="email">Email</label>
+                <form:errors path="email" cssClass="error"/>
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">security</i>
-                <input placeholder="Enter your password" id="password" type="password" class="validate" name="password">
+                <input placeholder="Enter your password" id="password" type="password" class="validate" name="password" required>
                 <label for="password">Password</label>
+                <form:errors path="password" cssClass="error"/>
             </div>
 
             <div class="input-field col s6">
                 <i class="material-icons prefix">verified_user</i>
                 <input placeholder="Enter your password again" id="passwordConfirmation" type="password"
-                       class="validate" name="passwordConfirmation">
+                       class="validate" name="passwordConfirmation" required>
                 <label for="password">Password Confirmation</label>
+                <form:errors path="passwordConfirmation" cssClass="error"/>
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
-                <input placeholder="Enter your name" id="first_name" type="text" class="validate" name="firstName">
+                <input placeholder="Enter your name" id="first_name" type="text" class="validate" name="firstName" required>
                 <label for="first_name">First Name</label>
+                <form:errors path="firstName" cssClass="error"/>
             </div>
 
             <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
-                <input placeholder="Enter your surname" id="last_name" type="text" class="validate" name="lastName">
+                <input placeholder="Enter your surname" id="last_name" type="text" class="validate" name="lastName" required>
                 <label for="last_name">Last Name</label>
+                <form:errors path="lastName" cssClass="error"/>
             </div>
         </div>
+
+
 
         <div class="row">
             <div class="input-field col s2">

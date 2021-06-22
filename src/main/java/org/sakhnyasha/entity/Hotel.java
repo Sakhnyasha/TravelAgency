@@ -3,14 +3,11 @@ package org.sakhnyasha.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.Set;
+
 
 @Data
 @AllArgsConstructor
@@ -21,12 +18,12 @@ public class Hotel extends BaseEntity{
 
     @Column(name = "name")
     @Size(min = 3, max = 50, message = "{hotel.name.invalid}")
-    @NotEmpty(message = "Please enter hotel name")
+    @NotBlank(message = "Please enter hotel name")
     private String name;
 
     @Column(name = "address")
     @Size(min = 3, max = 150, message = "{hotel.address.invalid}")
-    @NotEmpty(message = "Please enter hotel local address")
+    @NotBlank(message = "Please enter hotel local address")
     private String address;
 
     @ManyToOne

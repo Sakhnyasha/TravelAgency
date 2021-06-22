@@ -1,16 +1,14 @@
 package org.sakhnyasha.repository;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
-import org.sakhnyasha.entity.Booking;
 import org.sakhnyasha.entity.Room;
-import org.sakhnyasha.entity.Booking;
-import org.sakhnyasha.entity.User;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;

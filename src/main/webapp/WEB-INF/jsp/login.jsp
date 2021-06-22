@@ -27,7 +27,7 @@
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">assignment_ind</i>
-                <input placeholder="Email" id="login" type="email" class="validate" name="username">
+                <input placeholder="Email" id="login" type="email" class="validate" name="username" required>
                 <label for="login">Login</label>
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">security</i>
-                <input placeholder="Password" id="password" type="password" class="validate" name="password">
+                <input placeholder="Password" id="password" type="password" class="validate" name="password" required>
                 <label for="password">Password</label>
             </div>
         </div>

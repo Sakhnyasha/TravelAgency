@@ -23,28 +23,34 @@
 
 <h4>Room Adding</h4>
 <div class="row">
-    <form action="${roomAddingURL}" method="post">
+    <form:form action="${roomAddingURL}" method="post" modelAttribute="room">
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">room_service</i>
-                <input placeholder="Enter name(type)" id="name" type="text" class="validate" name="name">
+                <input placeholder="Enter name(type)" id="name" type="text" class="validate"
+                       name="name" value="${name}" required>
                 <label for="name">Name</label>
+                <form:errors path="name" cssClass="error"/>
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">attach_money</i>
-                <input placeholder="Enter price" id="price" type="text" class="validate" name="price">
+                <input placeholder="Enter price" id="price" type="number" class="validate"
+                       name="price" value="${price}" required>
                 <label for="price">Price</label>
+                <form:errors path="price" cssClass="error"/>
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">person_add</i>
-                <input placeholder="Enter capacity of room" id="capacity" type="text" class="validate" name="capacity">
+                <input placeholder="Enter capacity of room" id="capacity" type="text"
+                       class="validate" name="capacity" value="${capacity}" required>
                 <label for="capacity">Capacity</label>
+                <form:errors path="capacity" cssClass="error"/>
             </div>
         </div>
 
@@ -61,7 +67,7 @@
                 </button>
             </div>
         </div>
-    </form>
+    </form:form>
 </div>
 </body>
 </html>

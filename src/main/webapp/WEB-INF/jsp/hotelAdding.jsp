@@ -38,9 +38,9 @@
         </div>
         <div class="input-field col s5">
             <form action="${addHotelUrl}" method="post">
-                <select name="selectedCountry" id="country" required="required" onchange="this.form.submit()">
+                <select name="selectedCountry" id="country" required onchange="this.form.submit()">
                     <c:if test="${empty selectedCountry}">
-                        <option disabled selected> -- select country --</option>
+                        <option disabled selected value=""> -- select country --</option>
                     </c:if>
                     <c:if test="${not empty selectedCountry}">
                         <option disabled> -- select country --</option>
@@ -58,38 +58,54 @@
         </div>
     </div>
 
-    <form id="hotelData" action="${addHotelSuccessUrl}" method="post">
+    <form:form id="hotelData" action="${addHotelSuccessUrl}" method="post" modelAttribute="newHotel">
         <div class="row">
             <div class="input-field col s1">
                 <i class="material-icons prefix">location_city</i>
                 <label for="city">City</label>
             </div>
             <div class="input-field col s5">
-                <select name="cityId" id="city" class="select-dropdown" required="required">
-                    <option disabled="disabled" selected="selected"> -- select city --</option>
+                <select name="cityId" id="city" class="select-dropdown" required>
+                    <c:if test="${empty selectedCity}">
+                        <option disabled selected value=""> -- select city --</option>
+                    </c:if>
+                    <c:if test="${not empty selectedCity}">
+                        <option disabled> -- select city --</option>
+                    </c:if>
                     <c:forEach items="${cities}" var="city">
-                        <option value="${city.id}">${city.name}</option>
+                        <c:if test="${city.id eq selectedCity}">
+                            <option value="${city.id}" selected>${city.name}</option>
+                        </c:if>
+                        <c:if test="${selectedCity ne city.id}">
+                            <option value="${city.id}">${city.name}</option>
+                        </c:if>
                     </c:forEach>
                 </select>
+                <form:errors path="cityId" cssClass="error"/>
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">hotel</i>
-                <input id="name" type="text" class="validate" name="hotelName" form="hotelData">
+                <input id="name" type="text" class="validate" name="hotelName" form="hotelData"
+                       required value="${hotelName}">
                 <label for="name">Hotel Name</label>
+                <form:errors path="hotelName" cssClass="error"/>
             </div>
         </div>
 
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">my_location</i>
-                <input id="address" type="text" class="validate" name="address">
+                <input id="address" type="text" class="validate" name="hotelAddress"
+                       required value="${address}">
                 <label for="address">Address</label>
+                <form:errors path="hotelAddress" cssClass="error"/>
             </div>
         </div>
-    </form>
+    </form:form>
+
 
     <div class="row">
         <div class="input-field col s2">

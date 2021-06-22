@@ -2,12 +2,8 @@ package org.sakhnyasha.service;
 
 import org.sakhnyasha.entity.City;
 import org.sakhnyasha.entity.Country;
-import org.sakhnyasha.entity.Hotel;
-import org.sakhnyasha.entity.Room;
 import org.sakhnyasha.repository.CityRepository;
 import org.sakhnyasha.repository.CountryRepository;
-import org.sakhnyasha.repository.HotelRepository;
-import org.sakhnyasha.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,4 +33,7 @@ public class LocationService {
         cityRepository.save(newCity);
     }
 
+    public City getCity(Long cityId) {
+        return cityRepository.findOne(cityId);
+    }
 }

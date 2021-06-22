@@ -3,18 +3,14 @@ package org.sakhnyasha.service;
 import org.sakhnyasha.entity.City;
 import org.sakhnyasha.entity.Hotel;
 import org.sakhnyasha.entity.Room;
-import org.sakhnyasha.model.HotelModel;
 import org.sakhnyasha.repository.CityRepository;
 import org.sakhnyasha.repository.HotelRepository;
 import org.sakhnyasha.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.LocaleResolver;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional

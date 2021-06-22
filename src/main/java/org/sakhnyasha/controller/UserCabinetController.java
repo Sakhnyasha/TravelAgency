@@ -1,10 +1,8 @@
 package org.sakhnyasha.controller;
 
 import org.sakhnyasha.entity.Booking;
-import org.sakhnyasha.model.RegistrationModel;
 import org.sakhnyasha.security.UserPrincipal;
 import org.sakhnyasha.service.BookingService;
-import org.sakhnyasha.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

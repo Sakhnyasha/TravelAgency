@@ -3,9 +3,7 @@ package org.sakhnyasha.repository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.sakhnyasha.entity.User;
-import org.sakhnyasha.repository.AbstractRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

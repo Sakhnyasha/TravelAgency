@@ -8,7 +8,6 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class HotelModel {
-
     private Long id;
     private String name;
     private String address;

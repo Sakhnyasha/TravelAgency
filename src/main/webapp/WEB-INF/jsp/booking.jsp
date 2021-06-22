@@ -37,45 +37,58 @@
 
         <div class="col s6">
 
-                <div class="row">
-                    <div class="input-field col s2">
-                        <i class="material-icons prefix">language</i>
-                        <label for="country" class="select-label">Country</label>
-                    </div>
-                    <div class="input-field col s4">
-                        <form:form action="${toUserBookinglURL}" method="post" modelAttribute="booking">
-                            <select name="selectedCountryId" id="country" required="required" onchange="this.form.submit()">
-                                <c:if test="${empty booking.selectedCountryId}">
-                                    <option disabled selected> -- select country --</option>
-                                </c:if>
-                                <c:if test="${not empty booking.selectedCountryId}">
-                                    <option disabled> -- select country --</option>
-                                </c:if>
-                                <c:forEach items="${booking.countries}" var="country">
-                                    <c:if test="${country.id eq booking.selectedCountryId}">
-                                        <option value="${country.id}" selected>${country.name}</option>
-                                    </c:if>
-                                    <c:if test="${booking.selectedCountryId ne country.id}">
-                                        <option value="${country.id}">${country.name}</option>
-                                    </c:if>
-                                </c:forEach>
-                            </select>
-                        </form:form>
-                    </div>
+            <div class="row">
+                <div class="input-field col s2">
+                    <i class="material-icons prefix">language</i>
+                    <label for="country" class="select-label">Country</label>
                 </div>
-            <form:form method="post" action="${toUserBookingSearchlURL}" id="booking" modelAttribute="booking" >
+                <div class="input-field col s4">
+                    <form:form action="${toUserBookinglURL}" method="post" modelAttribute="booking">
+                        <select name="selectedCountryId" id="country" required onchange="this.form.submit()">
+                            <c:if test="${empty selectedCountryId}">
+                                <option disabled selected value=""> -- select country --</option>
+                            </c:if>
+                            <c:if test="${not empty selectedCountryId}">
+                                <option disabled value=""> -- select country --</option>
+                            </c:if>
+                            <c:forEach items="${countries}" var="country">
+                                <c:if test="${country.id eq selectedCountryId}">
+                                    <option value="${country.id}" selected>${country.name}</option>
+                                </c:if>
+                                <c:if test="${selectedCountryId ne country.id}">
+                                    <option value="${country.id}">${country.name}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                        <form:errors path="selectedCountryId" cssClass="error"/>
+                    </form:form>
+                </div>
+            </div>
+            <form:form method="post" action="${toUserBookingSearchlURL}" id="booking" modelAttribute="booking">
+                <input type="hidden" name="selectedCountryId" value="${selectedCountryId}"/>
                 <div class="row">
                     <div class="input-field col s2">
                         <i class="material-icons prefix">location_city</i>
                         <label for="city">City</label>
                     </div>
                     <div class="input-field col s4">
-                        <select name="selectedCityId" id="city" class="select-dropdown" required="required">
-                            <option disabled="disabled" selected="selected"> -- select city --</option>
-                            <c:forEach items="${booking.cities}" var="city">
-                                <option value="${city.id}">${city.name}</option>
+                        <select name="selectedCityId" id="city" class="select-dropdown" required>
+                            <c:if test="${empty selectedCity}">
+                                <option disabled selected value=""> -- select city --</option>
+                            </c:if>
+                            <c:if test="${not empty selectedCity}">
+                                <option disabled> -- select city --</option>
+                            </c:if>
+                            <c:forEach items="${cities}" var="city">
+                                <c:if test="${city.id eq selectedCity}">
+                                    <option value="${city.id}" selected>${city.name}</option>
+                                </c:if>
+                                <c:if test="${selectedCity ne city.id}">
+                                    <option value="${city.id}">${city.name}</option>
+                                </c:if>
                             </c:forEach>
                         </select>
+                        <form:errors path="selectedCityId" cssClass="error"/>
                     </div>
                 </div>
 
@@ -85,7 +98,8 @@
                         <label for="checkin" class="select-label">Check-in Date</label>
                         <input type="date" id="checkin" name="checkIn"
                                max="2023-06-01" min="2021-06-01" class="datepicker-calendar-container"
-                               required="" placeholder="mm/dd/yyyy">
+                               required placeholder="mm/dd/yyyy" value="${booking.checkIn}">
+                        <form:errors path="checkIn" cssClass="error"/>
                     </div>
                 </div>
 
@@ -95,7 +109,8 @@
                         <label for="checkout" class="select-label">Check-out Date</label>
                         <input type="date" id="checkout" name="checkOut"
                                max="2023-06-01" min="2021-06-01" class="datepicker-calendar-container"
-                               required="" placeholder="mm/dd/yyyy">
+                               required placeholder="mm/dd/yyyy" value="${booking.checkOut}">
+                        <form:errors path="checkOut" cssClass="error"/>
                     </div>
                 </div>
 
@@ -103,8 +118,9 @@
                     <div class="input-field col s6">
                         <i class="material-icons prefix">person_add</i>
                         <label for="capacity" class="select-label">Number of Persons</label>
-                        <input type="number" id="capacity" name="capacity" required="" max="10" min="1"
-                               placeholder="Number of Persons">
+                        <input type="number" id="capacity" name="capacity" required max="10" min="1"
+                               placeholder="Number of Persons" value="${booking.capacity}">
+                        <form:errors path="capacity" cssClass="error"/>
                     </div>
                 </div>
 
@@ -141,19 +157,19 @@
                     </tr>
                     <c:forEach items="${booking.availableRooms}" var="room">
                         <form:form modelAttribute="booking" method="post" action="${toUserBookingSubmitlURL}">
-                        <tr>
-                            <td>${room.hotel.name}</td>
-                            <td>${room.name}</td>
-                            <td>${room.price}</td>
-                            <td>
-                                <button class="btn waves-effect waves-light" type="submit"
-                                        name="selectedRoom" value="${room.id}">Book
-                                    <i class="material-icons right">check</i>
-                                </button>
-                                <input type="hidden" name="checkIn" value="${booking.checkIn}"/>
-                                <input type="hidden" name="checkOut" value="${booking.checkOut}"/>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>${room.hotel.name}</td>
+                                <td>${room.name}</td>
+                                <td>${room.price}</td>
+                                <td>
+                                    <button class="btn waves-effect waves-light" type="submit"
+                                            name="selectedRoom" value="${room.id}">Book
+                                        <i class="material-icons right">check</i>
+                                    </button>
+                                    <input type="hidden" name="checkIn" value="${booking.checkIn}"/>
+                                    <input type="hidden" name="checkOut" value="${booking.checkOut}"/>
+                                </td>
+                            </tr>
                         </form:form>
                     </c:forEach>
                 </table>

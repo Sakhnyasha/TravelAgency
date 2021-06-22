@@ -1,7 +1,9 @@
 package org.sakhnyasha.entity;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "countries")

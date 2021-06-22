@@ -18,6 +18,7 @@
     <spring:url value="/manager/cities/add" var="addCitySuccessUrl"/>
 
 </head>
+<body>
 <div>
     <script type="text/javascript" src="${minJs}"></script>
 
@@ -30,19 +31,20 @@
 
     <h4>Add City</h4>
     <div class="row">
-        <form action="${addCitySuccessUrl}" method="post">
+        <form:form action="${addCitySuccessUrl}" method="post" modelAttribute="city">
             <div class="row">
                 <div class="input-field col s1">
                     <i class="material-icons prefix">language</i>
                     <label for="country" class="select-label">Country</label>
                 </div>
                 <div class="input-field col s5">
-                    <select name="selectedCountry" id="country" required="required">
-                        <option disabled selected> -- select country --</option>
+                    <select name="countryId" id="country">
+                        <option disabled selected value=""> -- select country --</option>
                         <c:forEach items="${countries}" var="country">
                             <option value="${country.id}">${country.name}</option>
                         </c:forEach>
                     </select>
+                    <form:errors path="countryId" cssClass="error"/>
                 </div>
             </div>
             <div class="row">
@@ -51,7 +53,8 @@
                     <label for="city">City</label>
                 </div>
                 <div class="input-field col s5">
-                    <input id="city" type="text" class="validate" name="city">
+                    <input id="city" type="text" class="validate" name="name" required value="${currentCity}">
+                    <form:errors path="name" cssClass="error"/>
                 </div>
             </div>
 
@@ -68,7 +71,7 @@
                     </button>
                 </div>
             </div>
-        </form>
+        </form:form>
     </div>
 </div>
 </body>
