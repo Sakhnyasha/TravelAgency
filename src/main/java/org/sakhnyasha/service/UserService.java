@@ -2,6 +2,7 @@ package org.sakhnyasha.service;
 
 import org.sakhnyasha.entity.Role;
 import org.sakhnyasha.entity.User;
+import org.sakhnyasha.repository.BookingRepository;
 import org.sakhnyasha.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,9 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private BookingRepository bookingRepository;
+
     public void addUser(User user){
         String password = user.getPassword();
         user.setPassword(passwordEncoder.encode(password));
@@ -34,6 +38,7 @@ public class UserService {
     }
 
     public void deleteUser(Long id){
+        bookingRepository.deleteBookingsForUser(id);
         userRepository.deleteById(id);
     }
 
@@ -48,6 +53,11 @@ public class UserService {
         one.setRole(newRole);
         userRepository.update(one);
     }
+
+    public boolean exists(String email){
+        return userRepository.exists(email);
+    }
+
 
 
 }

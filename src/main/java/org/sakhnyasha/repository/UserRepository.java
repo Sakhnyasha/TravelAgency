@@ -32,5 +32,19 @@ public class UserRepository extends AbstractRepository<User> {
         return results.get(0);
     }
 
+    public boolean exists(String email){
+        Session session = getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> root = cq.from(User.class);
+
+        cq.select(root).where(cb.equal(root.get("email"), email));
+
+        Query<User> query = session.createQuery(cq);
+        List<User> results = query.getResultList();
+
+        return !results.isEmpty();
+    }
+
 
 }

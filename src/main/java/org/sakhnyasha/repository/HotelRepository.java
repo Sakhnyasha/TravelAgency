@@ -9,3 +9,4 @@ public class HotelRepository extends AbstractRepository<Hotel> {
         setClazz(Hotel.class);
     }
 }
+

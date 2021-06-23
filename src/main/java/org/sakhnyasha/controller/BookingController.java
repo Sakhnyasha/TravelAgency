@@ -75,14 +75,12 @@ public class BookingController {
         if(Date.valueOf(bookingModel.getCheckIn()).after(Date.valueOf(bookingModel.getCheckOut()))){
             bindingResult.rejectValue("checkOut", "booking.checkOut",
                     "Check Out must be after Check In");
-//            return new ModelAndView("booking", "booking", bookingModel);
         }
 
         Date dateCurrent = new Date(System.currentTimeMillis());
         if(dateCurrent.after(Date.valueOf(bookingModel.getCheckIn()))){
             bindingResult.rejectValue("checkIn", "booking.checkIn",
                     "Check In must be in future");
-
         }
 
         if(dateCurrent.after(Date.valueOf(bookingModel.getCheckOut()))){

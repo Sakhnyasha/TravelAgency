@@ -30,17 +30,16 @@ public class RegistrationController {
     @PostMapping("/register")
     public String addUser(@Valid @ModelAttribute("user") RegistrationModel user, BindingResult bindingResult){
 
+        if(!user.getPassword().equals(user.getPasswordConfirmation())){
+            bindingResult.rejectValue("passwordConfirmation", "user.passwordConfirmation",
+                    "Password mismatch");
+        }
+
         if(bindingResult.hasErrors()){
             return "register";
         }
 
-        if(!user.getPassword().equals(user.getPasswordConfirmation())){
-            bindingResult.rejectValue("passwordConfirmation", "user.passwordConfirmation",
-                    "Password mismatch");
-            return "register";
-        }
-
-        if(!user.getEmail().equals(userService.getUser(user.getEmail()).getEmail())){
+        if(!userService.exists(user.getEmail())){
             User newUser = new User(user.getEmail(), Role.USER, user.getFirstName(),
                     user.getLastName(), user.getPassword());
             userService.addUser(newUser);

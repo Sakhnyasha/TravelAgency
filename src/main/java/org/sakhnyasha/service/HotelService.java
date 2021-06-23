@@ -3,6 +3,7 @@ package org.sakhnyasha.service;
 import org.sakhnyasha.entity.City;
 import org.sakhnyasha.entity.Hotel;
 import org.sakhnyasha.entity.Room;
+import org.sakhnyasha.repository.BookingRepository;
 import org.sakhnyasha.repository.CityRepository;
 import org.sakhnyasha.repository.HotelRepository;
 import org.sakhnyasha.repository.RoomRepository;
@@ -24,12 +25,17 @@ public class HotelService {
     @Autowired
     private CityRepository cityRepository;
 
+    @Autowired
+    private BookingRepository bookingRepository;
+
 
     public List<Hotel> getAllHotels() {
         return hotelRepository.findAll();
     }
 
     public void deleteHotel(Long hotelId) {
+        roomRepository.findRoomsByHotelId(hotelId).forEach(room->
+                bookingRepository.deleteBookingsForRoom(room.getId()));
         roomRepository.deleteRoomsByHotelId(hotelId);
         hotelRepository.deleteById(hotelId);
     }
@@ -49,4 +55,5 @@ public class HotelService {
         Room newRoom = new Room(name, price, capacity, hotel);
         roomRepository.save(newRoom);
     }
+
 }

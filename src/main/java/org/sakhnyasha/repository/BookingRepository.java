@@ -6,6 +6,7 @@ import org.sakhnyasha.entity.Booking;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
@@ -28,6 +29,28 @@ public class BookingRepository extends AbstractRepository<Booking>{
         List<Booking> results = query.getResultList();
 
         return results;
+    }
+
+    public void deleteBookingsForUser(Long userId){
+        Session session = getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaDelete<Booking> cq = cb.createCriteriaDelete(Booking.class);
+        Root<Booking> root = cq.from(Booking.class);
+
+        cq.where(cb.equal(root.get("user"), userId));
+        session.createQuery(cq).executeUpdate();
+
+    }
+
+
+    public void deleteBookingsForRoom(Long roomId){
+        Session session = getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaDelete<Booking> cq = cb.createCriteriaDelete(Booking.class);
+        Root<Booking> root = cq.from(Booking.class);
+
+        cq.where(cb.equal(root.get("room"), roomId));
+        session.createQuery(cq).executeUpdate();
     }
 
 }
