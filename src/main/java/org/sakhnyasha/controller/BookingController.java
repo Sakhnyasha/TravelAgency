@@ -118,9 +118,4 @@ public class BookingController {
                 Date.valueOf(bookingModel.getCheckIn()), Date.valueOf(bookingModel.getCheckOut()));
         return "redirect:/user/cabinet";
     }
-
-
-
-
-
 }

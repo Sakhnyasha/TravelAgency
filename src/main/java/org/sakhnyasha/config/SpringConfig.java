@@ -40,6 +40,7 @@ public class SpringConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
+    //enable access to static resources
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
